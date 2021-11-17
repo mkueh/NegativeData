@@ -10,7 +10,7 @@
 	
 ## Windows
 
-install RDkit with conda
+	#install RDkit with conda
 	conda install -c conda-forge rdkit
 
 	pip install Tool_EasyChemML
