@@ -1,0 +1,202 @@
+{
+    #-------------------------------------------------------------------------------------------------------
+    #----------------------------------------------SETTINGS-------------------------------------------------
+    #-------------------------------------------------------------------------------------------------------
+    #
+    #Configurations of the SFFcode Machine Learning Software Tool
+    # - Feature and Target Files
+    # - Type of Features
+    # - Details of Machine Learning Computation
+    #
+    #-------------------------------------------------------------------------------------------------------
+    #-------------------------------------------------------------------------------------------------------
+    #-------------------------------------------------------------------------------------------------------
+
+    #INPUT-SETTINGS
+    input_settings:
+    {
+        #TYPE OF INPUT FILE
+        # Options: 1 - CSV
+        # Options: 2 - XLSX
+        feature_inputtype: 1
+        target_inputtype: 1
+
+        #LOCATION OF FEATURE FILE (relative path)
+        feature_path: input_small.csv
+
+        #COLUMN TITLES OF FEATURES (multi-feature in json array-style)
+        #CSV needs a Header in the first line
+        feature_colume:
+        [
+            Temperature
+        ]
+
+        #COLUMN TITLES OF FEATURES TO BE ENCODED
+        #CSV needs a Header in the first line
+        feature_encoded:
+        [
+            Temperature
+        ]
+
+        #LOCATION OF TARGET FILE (relative path)
+        target_path: input_small.csv
+
+        #COLUMN TITLES OF TARGETS (multi-feature in json array-style)
+        #CSV needs a Header in the first line
+        target_colume:
+        [
+          Yield
+        ]
+
+        #ADDITIONAL SETTINGS
+        #for XLSX
+        #    - sheet_name
+        feature_Inputsettings: { 'sheet_name': 'FullCV_01' }
+        target_Inputsettings: { 'sheet_name': 'FullCV_01' }
+
+        additional_datapayload:
+        {
+
+        }
+    }
+
+    #SPLITTER-SETTINGS
+    splitter_settings:
+    {
+
+        saveLoad_split : 'createdSplit.split'
+
+        #Inner Splitter for the nested-CV (Hyperparameter optimization)
+        #s_loo : featurebased leave one out cross-validation {'selectedFeature' : 'SMILES', 'shuffle' : true}
+        #s_preset: user select the train and test set manuel {'testset_start': 1, 'testset_end' : 2200}
+        #s_kfold: k-fold random splitt {'n_splits': 5, 'random_state' : 42, 'shuffle' : true}
+        #s_shuffle: shuffeld splitt {'n_splits': 5, 'random_state' : 42, 'train_size':0.7}
+        inner_splitter : s_shuffle
+        inner_splittersettings : {'n_splits': 2, 'random_state' : 42, 'train_size':0.02}
+
+        #Outer Splitter for the dataset-CV
+        #s_none : do not run an outer split {}
+        #same as Inner
+        outer_splitter : s_shuffle
+        outer_splittersettings : {'n_splits': 2, 'random_state' : 42, 'train_size':0.02}
+    }
+
+
+
+    #ENCODER-SETTINGS
+    encoder_settings:
+    {
+        #CONFIGURATION OF THE ENCODING
+        #
+        #Options: e_sff - Single Fingerprint Features (SFF) ({'FP_length' : 3096})
+        #                -->  The FP is chosen in the Hyperparameter Optimization, this results in a large number of jobs
+        #         e_mff - Multiple Fingerprint Features (SFFcode)       ({'FP_length' : 3096})
+        #         e_onehot - One-Hot-Encoded Matrix as Features         ({})
+        #         e_mol2vec - use a Mol2Vec-vector as feature           ({})
+        #         e_NONE    - No Encoding of Inputdata                  ({})
+        #         e_evofp   - use the EVO-Fingerprint                   ({'populationSize' : 150, 'newgen_rate': 0.05, 'gen_recombinationrate' : 0.3, 'newpop_perStep' : 0.2,
+        #                                                                'usebestforkids':0.3 , 'keepbest_perStep' : 0.2, 'fp_size': 64, 'evo_steps': 10, 'fitfunc_name': 'diversity',
+        #                                                                'fitfunc_param': {}, 'feature_typ':'count', 'multiMOL_solver':'foreach'})
+        #               --> created an EVO-Fingerprint encoding for each outer split
+        #                   feature_typ = match or count
+        #                   multiMOL_solver = single or foreach
+        #               --> diversity fitfunc:
+        #               --> model fitness fitfunc_param:
+        #                   - metricscore: look at eval_type
+        #                   - model: look at model_settings
+        #                   - model_args: look at model_settings
+        #                 optional: (default is s_shuffle n = 3 random = 42 and 70/30)
+        #                   -splitter: look at splitter_settings
+        #                   -splitter_args: look at splitter_settings
+        #
+        #
+        encoder : e_NONE
+        encoder_settings : {'populationSize' : 100, 'newgen_rate': 0.05, 'gen_recombinationrate' : 0.15, 'newpop_perStep' : 0.2,
+                        'usebestforkids':0.4 , 'keepbest_perStep' : 0.2, 'fp_size': 128, 'evo_steps': 20,
+                        'fitfunc_name': 'model', 'fitfunc_param': {'metricscore':'r2_score', 'model':'catboost_r', 'model_args':{'verbose':0}},
+                        'feature_typ':'match', 'multiMOL_solver':'single', 'createFittingPlot': {'metricscore':'r2_score', 'model':'catboost_r', 'model_args':{'verbose':0, 'thread_count':-1}}}
+    }
+
+    #PREPROCESSING-SETTINGS
+    preprocessing_settings:
+    {
+        #ACTIVATE UNUSABLE FEATURES ERASURE
+        erasurefeature : false
+
+        #Preprocessing-Pipeline
+        #Options: scikit_TruncatedSVD {'n_components': 5, 'n_iter': 5} for more look at https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.TruncatedSVD.html
+        #         NonePrepro for no Preprocessing
+        featureSteps : ['NonePrepro'],
+        featureSteps_configs : [{}],
+        targetSteps : ['NonePrepro'],
+        targetSteps_configs : [{}]
+    }
+
+    #HYPERPARAMETER_SEARCH SETTINGS
+    #Here you can configure the hyperparameter search
+    #for more information see readme in the hypterparamter folder
+    hyperparamterSearch_settings:
+    {
+        hyperparamterSearch_algo: 'grid_search'
+        hyperparamterSearch_param: {}
+
+        fixparam_forOuter: {}
+    }
+
+    #JOBRUNNER SETTINGS
+    #There is nothing to do here yet
+    jobrunner_settings:
+    {
+        jobrunner: 'local_runner'
+        jobrunner_para: {}
+    }
+
+    #MODEL-SETTINGS
+    model_settings:
+    {
+        #MACHINE LEARNING ALGORYTHM
+        #scikit_randomforest_r      sklearn Random-Forest Regressor {'n_estimators': [50,10],'random_state':[42],'n_jobs': [-2]}
+        #scikit_randomforest_c      sklearn Random-Forest Classifier {'n_estimators': [50,10],'random_state':[42],'n_jobs': [-2]}
+        #scikit_bagging_r           sklearn Bagging Regressor
+        #scikit_extratrees_r        sklearn Extra-Tree Regressor
+        #scikit_histgraboosting_r   sklearn Histogram-based Gradient Boosting Regression Tree
+        #scikit_sgd_c               sklearn SGD Classifier https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier
+        #scikit_NNMLP_r             sklearn Neural Network MLP Regressor {'hidden_layer_sizes':[(1000, 1000 , 30)], 'learning_rate_init':[0.001,0.01,0.1]}
+        #deepchem_GCNN_r            deepchem_GCNN Regressor {'learning_rate':[1,0.1,0.001],'nb_epoch':[50] ,'graph_conv_layers':[64,64], 'dense_layer_size':[128], 'dropout':[0.05], 'number_atom_features':[75], 'batch_size':[200]}
+        #cuml_randomforest_r CUML RandomForestRegressor {same as sklearn}  #TODO Multi-GPU
+        #catboost_r                 CatBoost Regressor https://catboost.ai/docs/concepts/python-reference_parameters-list.html#python-reference_parameters-list
+        #catboost_c                 CatBoost Classifier https://catboost.ai/docs/concepts/python-reference_parameters-list.html#python-reference_parameters-list
+        using_algo : 'scikit_randomforest_r'
+        using_algosettings : {n_estimators: {typ:'int', range:[2,10]},random_state:42,n_jobs: -2}
+    }
+
+    #ANALYTIC-SETTINGS
+    #The analytical part of the tool is configured here
+    #Options:
+       #   !regressor metrics!
+       #         r2_score
+       #         mean_squared_error
+       #         mean_absolute_error
+       #         explained_variance_score
+       #         max_error
+       #   !classifier metrics!
+       #         f1_score
+       #         jaccard_score
+       #         precision_score
+       #         recall_score
+       #         zero_one_loss
+    analytic_settings:
+    {
+        #Output - Metrics to be calculated
+        metrics: []
+
+        #settings for the Output metrics
+        #can be empty or fill with '' for each metric
+        metrics_settings: []
+
+        #For the Hyperparametersearch
+        optimise_metric : r2_score
+        optimise_metric_settings : {}
+    }
+
+}
