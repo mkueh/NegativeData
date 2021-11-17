@@ -1,0 +1,138 @@
+{
+  input_settings:
+  {
+    feature_inputtype: 1
+    target_inputtype: 1
+    feature_path: input.csv
+    feature_colume:
+    [
+      Reaction SMILES
+    ]
+    feature_encoded:
+    [
+      Reaction SMILES
+    ]
+    target_path: input.csv
+    target_colume:
+    [
+      Yield
+    ]
+    feature_Inputsettings:
+    {
+      sheet_name: FullCV_01
+    }
+    target_Inputsettings:
+    {
+      sheet_name: FullCV_01
+    }
+  }
+  splitter_settings:
+  {
+    inner_splitter: s_shuffle
+    inner_splittersettings:
+    {
+      n_splits: 1
+      test_size: 0.15
+      random_state: 42
+    }
+    outer_splitter: s_preset
+    outer_splittersettings:
+    {
+      testset_start: 337
+      testset_end: 1524
+    }
+  }
+  encoder_settings:
+  {
+    encoder: e_mff
+    encoder_settings:
+    {
+      FP_length: 2048
+    }
+  }
+  preprocessing_settings:
+  {
+    erasurefeature: false
+    featureSteps:
+    [
+      NonePrepro
+    ]
+    featureSteps_configs:
+    [
+      {}
+    ]
+    targetSteps:
+    [
+      NonePrepro
+    ]
+    targetSteps_configs:
+    [
+      {}
+    ]
+  }
+  hyperparamterSearch_settings:
+  {
+    hyperparamterSearch_algo: hyperopt
+    hyperparamterSearch_param:
+    {
+      max_evals: 15
+    }
+    fixparam_forOuter:
+    {
+      num_train_epochs: 15
+    }
+  }
+  jobrunner_settings:
+  {
+    jobrunner: local_runner
+    jobrunner_para: {}
+  }
+  model_settings:
+  {
+    using_algo: simpletransformer_BERT_regressor
+    using_algosettings:
+    {
+      cuda: 0
+      dropout:
+      {
+        typ: flt
+        range:
+        [
+          0.05
+          0.8
+        ]
+      }
+      learning_rate:
+      {
+        typ: flt
+        range:
+        [
+          1e-06
+          0.0001
+        ]
+      }
+      num_train_epochs: 5
+    }
+  }
+  analytic_settings:
+  {
+        #Output - Metrics to be calculated
+        output_metrics:['r2_score']
+
+        #settings for the Output metrics
+        #can be empty or fill with '' for each metric
+        output_metrics_settings:[{}]
+
+        #For the Hyperparametersearch
+        optimise_metric : r2_score
+        optimise_metric_settings : {}
+  }
+  system_settings:
+{
+}
+
+  output_settings:
+  {
+    nameforoutput: Test2
+  }
+}
