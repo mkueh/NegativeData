@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{fc983383-e2d7-411e-9d48-b5d2bc082caf}</ProjectGuid>
+    <ProjectHome />
+    <StartupFile>Main.py</StartupFile>
+    <SearchPath />
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <ProjectTypeGuids>{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <InterpreterId>Global|ContinuumAnalytics|Anaconda37-64</InterpreterId>
+    <IsWindowsApplication>False</IsWindowsApplication>
+    <EnableNativeCodeDebugging>True</EnableNativeCodeDebugging>
+    <CommandLineArguments>-w workingdir</CommandLineArguments>
+    <InterpreterArguments>
+    </InterpreterArguments>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="AFE_DM.py" />
+    <Compile Include="clean.py" />
+    <Compile Include="Config\Configcreator.py" />
+    <Compile Include="Encoder\EncoderInterface.py" />
+    <Compile Include="Encoder\EvoFingerprint\EvoFingerCreator.py" />
+    <Compile Include="Encoder\EvoFingerprint\Fitnessfunction\IsFullRelevant_Fitness.py" />
+    <Compile Include="Encoder\EvoFingerprint\Fitnessfunction\ModelWrapper_Fitness.py" />
+    <Compile Include="Encoder\EvoFingerprint\Fitnessfunction\_IsFullRelevant_Fitness\setup.py" />
+    <Compile Include="Encoder\EvoFingerprint\Generator\SGenerator\setup.py" />
+    <Compile Include="Encoder\EvoFingerprint\Generator\SMARTFingerprintGenerator.py" />
+    <Compile Include="Encoder\EvoFingerprint\Generator\SMART_FingerprintInheritance.py" />
+    <Compile Include="Encoder\EvoFingerprint\Splitter.py" />
+    <Compile Include="Encoder\EvoFingerprint\Utilities\SMART_Fingerprint.py" />
+    <Compile Include="Encoder\EvoFingerprint\Utilities\SMART_IsColumneRelevant.py" />
+    <Compile Include="Encoder\EvoFingerprint\Utilities\SMART_Pattern.py" />
+    <Compile Include="Encoder\EvoFingerprint\Utilities\_SMART_IsColumneRelevant\setup.py" />
+    <Compile Include="Encoder\EvoFP.py" />
+    <Compile Include="Encoder\FingerprintEncoder.py" />
+    <Compile Include="Encoder\MFF.py" />
+    <Compile Include="Encoder\MolRdkitConverter.py" />
+    <Compile Include="Encoder\NoneEncoder.py" />
+    <Compile Include="Encoder\OnehotEncoder.py" />
+    <Compile Include="Encoder\Wrapper_Mol2Vec.py" />
+    <Compile Include="Encoder\__FingerprintEncoder\setup.py" />
+    <Compile Include="Konfiguration\AppSettings.py" />
+    <Compile Include="Konfiguration\configloader.py" />
+    <Compile Include="Main.py" />
+    <Compile Include="Model\Abstract_Model.py" />
+    <Compile Include="Model\CatBoost_c.py" />
+    <Compile Include="Model\CatBoost_r.py" />
+    <Compile Include="Model\cuML_RandomForestRegressor.py" />
+    <Compile Include="Model\deepchem_GCNN.py" />
+    <Compile Include="Model\scikit_BaggingRegressor.py" />
+    <Compile Include="Model\scikit_ExtraTreesRegressor.py" />
+    <Compile Include="Model\scikit_HistGradientBoostingRegressor.py" />
+    <Compile Include="Model\scikit_NeuralNMLPRegressor.py" />
+    <Compile Include="Model\scikit_RandomForestClassifier.py" />
+    <Compile Include="Model\scikit_RandomForestRegressor.py" />
+    <Compile Include="Model\scikit_SGDClassifier.py" />
+    <Compile Include="Model\scikit_SVM.py" />
+    <Compile Include="ModulSystem\ModulManager.py" />
+    <Compile Include="Parallelization\MPI_CheckpointSystem.py" />
+    <Compile Include="Parallelization\MPI_Configrunner.py" />
+    <Compile Include="Parallelization\MPI_Datatransfer.py" />
+    <Compile Include="Parallelization\WorkerJob.py" />
+    <Compile Include="Preprocessing\Modul\NonePrepro.py" />
+    <Compile Include="Preprocessing\Modul\own_BinareFeatureSelection.py" />
+    <Compile Include="Preprocessing\Modul\own_SMILEScombine.py" />
+    <Compile Include="Preprocessing\Modul\scikit_TruncatedSVD.py" />
+    <Compile Include="Preprocessing\Preprocessing.py" />
+    <Compile Include="setup.py" />
+    <Compile Include="Splitter\Modul\FeatureKFoldSplitter.py" />
+    <Compile Include="Splitter\Modul\LeaveOneOutSplitter.py" />
+    <Compile Include="Splitter\Modul\NoneSplitter.py" />
+    <Compile Include="Splitter\Modul\PresetSplitter.py" />
+    <Compile Include="Splitter\Modul\Scikitlearn_Splitter.py" />
+    <Compile Include="Splitter\Splitcreator.py" />
+    <Compile Include="Utilities\DataBuffer.py" />
+    <Compile Include="Utilities\DataImporter.py" />
+    <Compile Include="Utilities\Dataset.py" />
+    <Compile Include="Utilities\DictionaryBuffer.py" />
+    <Compile Include="Utilities\MetricList.py" />
+    <Compile Include="Utilities\Metrics.py" />
+    <Compile Include="Utilities\ParallelUtilities\Counter.py" />
+    <Compile Include="Utilities\Performance\Performance_analysis.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Encoder\EvoFingerprint\Fitnessfunction\_IsFullRelevant_Fitness\CIsFullRelevant_Fitness.pyx" />
+    <Content Include="Encoder\EvoFingerprint\Generator\SGenerator\SMARTGenerator.pyx" />
+    <Content Include="Encoder\EvoFingerprint\Utilities\_SMART_IsColumneRelevant\CSMART_IsColumneRelevant.pyx" />
+    <Content Include="Encoder\__FingerprintEncoder\FingerprintGenerator.pyx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Config" />
+    <Folder Include="Encoder" />
+    <Folder Include="Encoder\EvoFingerprint" />
+    <Folder Include="Encoder\EvoFingerprint\Fitnessfunction" />
+    <Folder Include="Encoder\EvoFingerprint\Fitnessfunction\_IsFullRelevant_Fitness" />
+    <Folder Include="Encoder\EvoFingerprint\Generator" />
+    <Folder Include="Encoder\EvoFingerprint\Generator\SGenerator" />
+    <Folder Include="Encoder\EvoFingerprint\Utilities" />
+    <Folder Include="Encoder\EvoFingerprint\Utilities\_SMART_IsColumneRelevant" />
+    <Folder Include="Encoder\__FingerprintEncoder" />
+    <Folder Include="Konfiguration" />
+    <Folder Include="Model" />
+    <Folder Include="ModulSystem" />
+    <Folder Include="Parallelization" />
+    <Folder Include="Preprocessing" />
+    <Folder Include="Preprocessing\Modul" />
+    <Folder Include="Splitter" />
+    <Folder Include="Splitter\Modul" />
+    <Folder Include="Utilities" />
+    <Folder Include="Utilities\ParallelUtilities" />
+    <Folder Include="Utilities\Performance" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterpreterReference Include="Global|ContinuumAnalytics|Anaconda37-64" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
+</Project>
