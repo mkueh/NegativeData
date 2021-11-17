@@ -16,3 +16,8 @@
 	pip install Tool_EasyChemML
 	cd Tool_EasyChemML
 	pip install rxnfp
+	
+# Using EasyChemML
+
+	#cd to settings.hjson and run
+	EasyChemML -w ./
