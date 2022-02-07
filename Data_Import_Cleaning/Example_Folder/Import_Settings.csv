@@ -1,0 +1,7 @@
+Column Title,Column Number,Data Type,Scale,Delete_if_empty,Merge,Filter,Role
+SM,9,rxn_smiles_sm,None,True,False,None,None
+Product,9,rxn_smiles_prod,None,True,False,None,Product
+Yield,33,int,0.00999,True,False,None,Target
+Additive,36,cmpd_name,None,False,False,no_metal,None
+Catalyst,37,cmpd_name,None,False,Additive,None,None
+Solvent,38,cmpd_name,None,True,False,None,None
