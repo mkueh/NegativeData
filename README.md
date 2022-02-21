@@ -4,7 +4,7 @@
 
 ## Linux
 		
-	pip install Tool_EasyChemML
+	pip install ./Tool_EasyChemML
 	cd Tool_EasyChemML
 	pip install rxnfp
 	
@@ -13,7 +13,7 @@
 	#install RDkit with conda
 	conda install -c conda-forge rdkit
 
-	pip install Tool_EasyChemML
+	pip install ./Tool_EasyChemML
 	cd Tool_EasyChemML
 	pip install rxnfp
 	
