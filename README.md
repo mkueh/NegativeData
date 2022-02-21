@@ -6,7 +6,7 @@
 		
 	pip install ./Tool_EasyChemML
 	cd Tool_EasyChemML
-	pip install rxnfp
+	pip install ./rxnfp
 	
 ## Windows
 
@@ -15,7 +15,7 @@
 
 	pip install ./Tool_EasyChemML
 	cd Tool_EasyChemML
-	pip install rxnfp
+	pip install ./rxnfp
 	
 # Using EasyChemML
 
