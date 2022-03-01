@@ -1,12 +1,12 @@
 from multiprocessing.shared_memory import SharedMemory
 from multiprocessing import Manager
 from tqdm import tqdm
-import numpy as np, os, time
+import numpy as np, os, time, sys, traceback
 from concurrent.futures import ProcessPoolExecutor
 
-from EasyChemML.Utilities.ParallelUtilities.IndexQueues.IndexQueue_Inorder import IndexQueue_Inorder
-from EasyChemML.Utilities.ParallelUtilities.IndexQueues.IndexQueue_settings import IndexQueue_settings
-from EasyChemML.Utilities.ParallelUtilities.Shared_PythonList import Shared_PythonList
+from Utilities.ParallelUtilities.IndexQueues.IndexQueue_Inorder import IndexQueue_Inorder
+from Utilities.ParallelUtilities.IndexQueues.IndexQueue_settings import IndexQueue_settings
+from Utilities.ParallelUtilities.Shared_PythonList import Shared_PythonList
 
 """
 Typing section
@@ -14,13 +14,24 @@ https://pypi.org/project/loky/
 """
 from typing import Dict, Tuple, List
 
+class ParallelProcessFailed(Exception):
+    message:str
+
+    def __init__(self, message):
+        self.message = message
+
+    def __str__(self):
+        return self.message
+
 
 class ParallelHelper():
     _processPool: ProcessPoolExecutor
     _max_worker: int
+    _progressbar = True
 
-    def __init__(self, n_jobs: int):
+    def __init__(self, n_jobs: int, progressbar = True):
         self._processPool, self._max_worker = self._createProcessPoolExecutor(n_jobs)
+        self._progressbar = progressbar
 
     def _createProcessPoolExecutor(self, n_jobs):
         if n_jobs == -1:
@@ -60,7 +71,16 @@ class ParallelHelper():
         for chunk in indexqueue:
             chunk = list(chunk)
             kwargs['current_chunk'] = chunk
-            result = function(**kwargs)
+            try:
+                result = function(**kwargs)
+            except Exception as e:
+                exc_type, exc_value, exc_traceback = sys.exc_info()
+                print('Parallelhelper process raise an exception')
+                print('--'*30)
+                traceback.print_tb(exc_traceback, limit=6, file=sys.stdout)
+                print(str(e))
+                print('--' * 30)
+                raise ParallelProcessFailed('Parallelhelper process failed')
             out_array[out_array_pointer:out_array_pointer+len(chunk)] = result
             out_array_pointer += len(chunk)
         ParallelHelper._closeSharedMem(kwargs)
@@ -76,20 +96,28 @@ class ParallelHelper():
             j = self._processPool.submit(ParallelHelper._parallelExecuter_MAP_orderd_return, out_dtypes,
                                          new_indexqu, fn, **kwargs)
             jobs.append((j, new_indexqu))
-
-        with tqdm(total=len(IQ_settings)) as pbar:
+        if self._progressbar:
+            with tqdm(total=len(IQ_settings)) as pbar:
+                finished = False
+                while not finished:
+                    finished = True
+                    status_count = 0
+                    for job, handler in jobs:
+                        handler_val = handler.get_already_processed()
+                        status_count += handler_val
+                        if not job.done():
+                            finished = False
+                    if not pbar.n == status_count:
+                        pbar.n = status_count
+                        pbar.refresh()
+                    time.sleep(0.1)
+        else:
             finished = False
             while not finished:
                 finished = True
-                status_count = 0
                 for job, handler in jobs:
-                    handler_val = handler.get_already_processed()
-                    status_count += handler_val
                     if not job.done():
                         finished = False
-                if not pbar.n == status_count:
-                    pbar.n = status_count
-                    pbar.refresh()
                 time.sleep(0.1)
 
         for _, handler in jobs:
@@ -99,9 +127,15 @@ class ParallelHelper():
 
         for job, handler in jobs:
             job_pointer = 0
-            job_result = job.result()
+            try:
+                job_result = job.result()
+            except:
+                for job in jobs:
+                    job[0].cancel()
+                m.shutdown()
+                raise ParallelProcessFailed('some process failed')
+
             for chunk in handler:
                 out_array[chunk] = job_result[job_pointer:job_pointer+len(chunk)]
                 job_pointer += len(chunk)
         m.shutdown()
-        return out_array
