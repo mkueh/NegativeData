@@ -1,0 +1,61 @@
+Experiment,Specification,Model,Serial Number,Size of Train Set,R^2 Score,MAE Score
+Amide Coupling Reaxys Dataset,,BERT,0,132869,0.23695708,0.157172984
+Amide Coupling Reaxys Dataset,,BERT,1,132869,0.250480946,0.157633093
+Amide Coupling Reaxys Dataset,,BERT,2,132869,0.238052862,0.158231893
+Amide Coupling Reaxys Dataset,,BERT,3,132869,0.233277196,0.160695826
+Amide Coupling Reaxys Dataset,,BERT,4,132869,0.240688063,0.158630796
+Amide Coupling Reaxys Dataset,,MFF,0,132869,0.37899922,0.14110536
+Amide Coupling Reaxys Dataset,,MFF,1,132869,0.382978295,0.141000657
+Amide Coupling Reaxys Dataset,,MFF,2,132869,0.380701362,0.141212339
+Amide Coupling Reaxys Dataset,,MFF,3,132869,0.382754881,0.141179624
+Amide Coupling Reaxys Dataset,,MFF,4,132869,0.381992566,0.141167455
+Amide Coupling Reaxys Dataset,,OHE,0,132869,0.153204459,0.158193892
+Amide Coupling Reaxys Dataset,,OHE,1,132869,0.161450282,0.157892164
+Amide Coupling Reaxys Dataset,,OHE,2,132869,0.161889788,0.157548454
+Amide Coupling Reaxys Dataset,,OHE,3,132869,0.157953649,0.158016763
+Amide Coupling Reaxys Dataset,,OHE,4,132869,0.154892994,0.158056709
+Buchwald-Hartwig Coupling Reaxys Dataset,,BERT,0,26268,0.351694014,0.159242146
+Buchwald-Hartwig Coupling Reaxys Dataset,,BERT,1,26268,0.3457317,0.160031382
+Buchwald-Hartwig Coupling Reaxys Dataset,,BERT,2,26268,0.342180594,0.157671883
+Buchwald-Hartwig Coupling Reaxys Dataset,,BERT,3,26268,0.339472852,0.157358941
+Buchwald-Hartwig Coupling Reaxys Dataset,,BERT,4,26268,0.34563965,0.158055077
+Buchwald-Hartwig Coupling Reaxys Dataset,,MFF,0,26268,0.45275142,0.144940455
+Buchwald-Hartwig Coupling Reaxys Dataset,,MFF,1,26268,0.440410743,0.144439912
+Buchwald-Hartwig Coupling Reaxys Dataset,,MFF,2,26268,0.44367065,0.143758559
+Buchwald-Hartwig Coupling Reaxys Dataset,,MFF,3,26268,0.435007258,0.145786951
+Buchwald-Hartwig Coupling Reaxys Dataset,,MFF,4,26268,0.443911367,0.143472772
+Buchwald-Hartwig Coupling Reaxys Dataset,,OHE,0,26268,0.290108177,0.159058093
+Buchwald-Hartwig Coupling Reaxys Dataset,,OHE,1,26268,0.287949197,0.155851083
+Buchwald-Hartwig Coupling Reaxys Dataset,,OHE,2,26268,0.267154647,0.158792492
+Buchwald-Hartwig Coupling Reaxys Dataset,,OHE,3,26268,0.270506168,0.158563264
+Buchwald-Hartwig Coupling Reaxys Dataset,,OHE,4,26268,0.281942945,0.15694822
+Suzuki Coupling Reaxys Dataset,,BERT,0,52815,0.281811602,0.152201738
+Suzuki Coupling Reaxys Dataset,,BERT,1,52815,0.295709421,0.15028101
+Suzuki Coupling Reaxys Dataset,,BERT,2,52815,0.294153159,0.150187042
+Suzuki Coupling Reaxys Dataset,,BERT,3,52815,0.296185702,0.150465611
+Suzuki Coupling Reaxys Dataset,,BERT,4,52815,0.314916165,0.150120074
+Suzuki Coupling Reaxys Dataset,,MFF,0,52815,0.392495684,0.138479949
+Suzuki Coupling Reaxys Dataset,,MFF,1,52815,0.395331432,0.137885461
+Suzuki Coupling Reaxys Dataset,,MFF,2,52815,0.387377151,0.139009748
+Suzuki Coupling Reaxys Dataset,,MFF,3,52815,0.394446809,0.137838822
+Suzuki Coupling Reaxys Dataset,,MFF,4,52815,0.406108684,0.136892454
+Suzuki Coupling Reaxys Dataset,,OHE,0,52815,0.208964592,0.151741761
+Suzuki Coupling Reaxys Dataset,,OHE,1,52815,0.199624381,0.152604273
+Suzuki Coupling Reaxys Dataset,,OHE,2,52815,0.192566188,0.152890717
+Suzuki Coupling Reaxys Dataset,,OHE,3,52815,0.19443532,0.152769737
+Suzuki Coupling Reaxys Dataset,,OHE,4,52815,0.19173764,0.15251063
+Nucleophilic Aromatic Substitution Reaxys Dataset,,BERT,0,72654,0.204963349,0.161906003
+Nucleophilic Aromatic Substitution Reaxys Dataset,,BERT,1,72654,0.219718583,0.162255289
+Nucleophilic Aromatic Substitution Reaxys Dataset,,BERT,2,72654,0.227994138,0.161278101
+Nucleophilic Aromatic Substitution Reaxys Dataset,,BERT,3,72654,0.212878183,0.162693492
+Nucleophilic Aromatic Substitution Reaxys Dataset,,BERT,4,72654,0.216610408,0.163447341
+Nucleophilic Aromatic Substitution Reaxys Dataset,,MFF,0,72654,0.329266413,0.149203818
+Nucleophilic Aromatic Substitution Reaxys Dataset,,MFF,1,72654,0.321385518,0.150579262
+Nucleophilic Aromatic Substitution Reaxys Dataset,,MFF,2,72654,0.338633792,0.148511772
+Nucleophilic Aromatic Substitution Reaxys Dataset,,MFF,3,72654,0.325312829,0.150634075
+Nucleophilic Aromatic Substitution Reaxys Dataset,,MFF,4,72654,0.329484303,0.149174815
+Nucleophilic Aromatic Substitution Reaxys Dataset,,OHE,0,72654,0.09026687,0.164836913
+Nucleophilic Aromatic Substitution Reaxys Dataset,,OHE,1,72654,0.071104338,0.166658
+Nucleophilic Aromatic Substitution Reaxys Dataset,,OHE,2,72654,0.093091724,0.164694412
+Nucleophilic Aromatic Substitution Reaxys Dataset,,OHE,3,72654,0.068529864,0.166973294
+Nucleophilic Aromatic Substitution Reaxys Dataset,,OHE,4,72654,0.074183326,0.16592558
