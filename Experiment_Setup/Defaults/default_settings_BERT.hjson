@@ -1,0 +1,141 @@
+{
+  input_settings:
+  {
+    feature_inputtype: 1
+    target_inputtype: 1
+    feature_path: input.csv
+    feature_colume:
+    [
+      SM1
+      SM2
+      Product
+      Additives
+      Solvent
+      Temperature
+    ]
+    feature_encoded:
+    [
+      SM1
+      SM2
+      Product
+      Additives
+      Solvent
+    ]
+    target_path: input.csv
+    target_colume:
+    [
+      Yield
+    ]
+    feature_Inputsettings:
+    {
+      sheet_name: FullCV_01
+    }
+    target_Inputsettings:
+    {
+      sheet_name: FullCV_01
+    }
+  }
+  splitter_settings:
+  {
+    inner_splitter: s_shuffle
+    inner_splittersettings:
+    {
+      n_splits: 1
+      test_size: 0.15
+      random_state: 42
+    }
+    outer_splitter: s_preset
+    outer_splittersettings:
+    {
+      testset_start: 2767
+      testset_end: 3955
+    }
+  }
+  encoder_settings:
+  {
+    encoder: e_bert_token
+    encoder_settings: {}
+  }
+  preprocessing_settings:
+  {
+    erasurefeature: false
+    featureSteps:
+    [
+      NonePrepro
+    ]
+    featureSteps_configs:
+    [
+      {}
+    ]
+    targetSteps:
+    [
+      NonePrepro
+    ]
+    targetSteps_configs:
+    [
+      {}
+    ]
+  }
+  hyperparamterSearch_settings:
+  {
+    hyperparamterSearch: hyperopt
+    hyperparamterSearch_param:
+    {
+      max_evals: 15
+    }
+    fixparam_forOuter:
+    {
+      num_train_epochs: 15
+    }
+  }
+  jobrunner_settings:
+  {
+    jobrunner: local_runner
+    jobrunner_para: {}
+  }
+  model_settings:
+  {
+    using_algo: simpletransformer_BERT_regressor
+    using_algosettings:
+    {
+      cuda: 3
+      dropout:
+      {
+        typ: flt
+        range:
+        [
+          0.05
+          0.8
+        ]
+      }
+      learning_rate:
+      {
+        typ: flt
+        range:
+        [
+          1e-06
+          0.0001
+        ]
+      }
+      num_train_epochs: 5
+    }
+  }
+  analytic_settings:
+  {
+    output_metrics:
+    [
+      r2_score
+    ]
+    output_metrics_settings:
+    [
+      {}
+    ]
+    optimise_metric: r2_score
+    optimise_metric_settings: {}
+  }
+  system_settings: {}
+  output_settings:
+  {
+    nameforoutput: abcdefg
+  }
+}

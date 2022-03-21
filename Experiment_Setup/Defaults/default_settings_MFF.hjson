@@ -1,0 +1,112 @@
+{
+  input_settings:
+  {
+    feature_inputtype: 1
+    target_inputtype: 1
+    feature_path: input.csv
+    feature_colume:
+    [
+      Temperature
+    ]
+    feature_encoded:
+    [
+      Temperature
+    ]
+    target_path: input.csv
+    target_colume:
+    [
+      Yield
+    ]
+    feature_Inputsettings:
+    {
+      sheet_name: FullCV_01
+    }
+    target_Inputsettings:
+    {
+      sheet_name: FullCV_01
+    }
+  }
+  splitter_settings:
+  {
+    inner_splitter: s_kfold
+    inner_splittersettings:
+    {
+      n_splits: 5
+      random_state: 42
+      shuffle: true
+    }
+    outer_splitter: s_preset
+    outer_splittersettings:
+    {
+      testset_start: 42
+      testset_end: 500
+    }
+  }
+  encoder_settings:
+  {
+    encoder: e_mff
+    encoder_settings:
+    {
+      FP_length: 2048
+    }
+  }
+  preprocessing_settings:
+  {
+    erasurefeature: false
+    featureSteps:
+    [
+      NonePrepro
+    ]
+    featureSteps_configs:
+    [
+      {}
+    ]
+    targetSteps:
+    [
+      NonePrepro
+    ]
+    targetSteps_configs:
+    [
+      {}
+    ]
+  }
+  hyperparamterSearch_settings:
+  {
+    hyperparamterSearch: grid_search
+    hyperparamterSearch_param: {}
+    fixparam_forOuter: {}
+  }
+  jobrunner_settings:
+  {
+    jobrunner: local_runner
+    jobrunner_para: {}
+  }
+  model_settings:
+  {
+    using_algo: scikit_randomforest_r
+    using_algosettings:
+    {
+      n_estimators: 200
+      random_state: 42
+      n_jobs: -2
+    }
+  }
+  analytic_settings:
+  {
+    output_metrics:
+    [
+      r2_score
+    ]
+    output_metrics_settings:
+    [
+      {}
+    ]
+    optimise_metric: r2_score
+    optimise_metric_settings: {}
+  }
+  system_settings: {}
+  output_settings:
+  {
+    nameforoutput: abcdefg
+  }
+}
